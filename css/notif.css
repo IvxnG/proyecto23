@@ -1,0 +1,65 @@
+.notif_container{
+    display: flex;
+    align-items: center;
+}
+.notif{
+    margin: 10px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    width: 300px;
+    height: 70px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in 6s ease forwards;
+    align-self: center;
+    margin: auto;
+
+}
+.welcome_text{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+.loader{
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-color: green;
+    animation: load 6s linear backwards;
+    z-index: 11111;
+
+}
+@keyframes fade-in {
+    5%,
+    90%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes load {
+    0%{
+        transform: translateX(0px);
+    }
+    25%{
+        transform: translateX(70px);
+        width: 75%;
+    }
+    50%{
+        transform: translateX(140px);
+        width: 50%;
+    }
+    75%{
+        transform: translateX(210px);
+        width: 25%;
+    }
+    100%{
+        transform: translateX(280px);
+        width: 0;
+    }
+}

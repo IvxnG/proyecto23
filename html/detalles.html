@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalles del Evento Deportivo</title>
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/detalles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="shortcut icon" href="../assets/logo.png" />
+  </head>
+  <body>
+    <!-- HEADER & MENU -->
+    <div class="header">
+      <nav class="nav">
+        <input type="checkbox" class="nav__cb" id="menu-cb" />
+        <div class="nav__content">
+          <ul class="nav__items">
+            <li class="nav__item">
+              <span class="nav__item-text"
+                ><a href="../index.html">Home</a></span
+              >
+            </li>
+            <li class="nav__item">
+              <span class="nav__item-text"
+                ><a href="../html/login.html">Log in</a></span
+              >
+            </li>
+            <li class="nav__item">
+              <span class="nav__item-text"
+                ><a href="../html/rutas.html">Rutas</a></span
+              >
+            </li>
+            <li class="nav__item">
+              <span class="nav__item-text"
+                ><a href="../html/detalles.html">Detalles</a></span
+              >
+            </li>
+          </ul>
+        </div>
+        <label class="nav__btn" for="menu-cb"></label>
+      </nav>
+    </div>
+    <br><br><br>
+    <!-- Detalles de la ruta creados con JS -->
+    <section class="first">
+      <h2>Información General</h2>
+      <p><strong>Nombre:</strong> [Nombre del evento]</p>
+      <p><strong>Fecha:</strong> [Fecha del evento]</p>
+      <p><strong>Lugar:</strong> [Ubicación del evento]</p>
+      <p><strong>Distancia:</strong> [Distancia de la carrera]</p>
+    </section>
+
+    <section>
+      <h2>Ubicación en el Mapa</h2>
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Inscripción</h2>
+      <p><strong>Costo de Inscripción:</strong> [Costo]</p>
+    </section>
+
+    <section>
+      <h2>Ruta</h2>
+      <p>Descripción de la ruta, puntos de interés, etc.</p>
+    </section>
+  </body>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../js/detalles.js"></script>
+  </html>
