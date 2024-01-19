@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <div id="notificacion"></div>
     <form class="my-form">
         <div class="login-welcome-row">
             <a href="#" title="Logo">
@@ -31,8 +30,8 @@
             </svg>
         </div>
         <div class="input__wrapper">
-            <input id="password" type="password" class="input__field" placeholder="Contraseña"
-                title="Minimo 6 caracteres y un número" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required>
+            <input id="password" type="password" class="input__field" placeholder="Contraseña" required>
+            <!-- title="Minimo 6 caracteres y un número" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" -->
             <label for="password" class="input__label">
                 Contraseña
             </label>
@@ -46,6 +45,12 @@
         </div>
         <button type="submit" id="btnLog" class="my-form__button">
             Login
+        </button>
+        <button type="submit" id="btnToken" class="my-form__button">
+            Token
+        </button>
+        <button type="submit" id="btnHome" class="my-form__button2">
+            Home
         </button>
         <div class="my-form__actions">
             <div class="my-form__row">

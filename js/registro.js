@@ -2,7 +2,6 @@ const url = 'http://localhost:3000/api/user/register';
 
 let createForm = document.querySelector(".my-form");
 let btnCreate = document.getElementById("btnCreate");
-let statusMsg;
 
 btnCreate.addEventListener("click", createUser)
 
@@ -25,10 +24,10 @@ function createUser(e) {
 
 
   let userData = {
-    name: "username2",
-    username: "user1157",
-    mail: "email2",
-    pass: "pass",
+    name: "ivan",
+    username: "ivan",
+    mail: "emai",
+    pass: "1234",
     city: city,
     phone: phone,
     club: club,
@@ -51,7 +50,7 @@ function createUser(e) {
     })
     .then(response => {
       if ( response.id ){
-        console.log(response.id);
+        console.log(response);
       } else {
         console.log(response.msg);
       }

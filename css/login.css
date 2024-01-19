@@ -61,7 +61,30 @@ body {
 }
 
 .my-form__button {
-    background-color: var(--primary);
+    background-color: var(--primary-light);
+    color: white;
+    white-space: nowrap;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    line-height: 50px;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: .025em;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 800;
+    min-height: 50px;
+    width: 100%;
+    border-radius: 99px;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+}
+
+.my-form__button2 {
+    background-color: var(--primary-dark);
     color: white;
     white-space: nowrap;
     border: none;
