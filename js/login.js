@@ -19,6 +19,7 @@ btnHome.addEventListener("click", home);
 function borrarToken() {
   console.log("Borrado el token");
   localStorage.removeItem("token");
+  localStorage.removeItem("user ");
 }
 
 // Función para redirigir a la página principal
@@ -66,6 +67,7 @@ function logUser(e) {
               console.log(response);
               // Almacena el token en el localStorage y redirige a la página principal
               localStorage.setItem("token", response.token);
+              localStorage.setItem("user", response.username);
               location.href = '../index.html';
             })
         }

@@ -1,5 +1,6 @@
 // Definición de la URL del servidor para creae el usuario
-const url = 'http://localhost:3000/api/user/register';
+const urlRegister = 'http://localhost:3000/api/user/register';
+const urlCheck = 'http://localhost:3000/api/user/check';
 
 // Selecciona elementos del DOM
 let createForm = document.querySelector(".my-form");
@@ -47,32 +48,51 @@ function createUser(e) {
     rol: "user",
   }
 
-  // Configura las opciones para la solicitud fetch
-  let options = {
+  // Configura las opciones para la solicitud fetch de registro
+  let optionsRegister = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   };
+  // Configura las opciones para la solicitud fetch de comprobar el nombre
+  let optionsCheck = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify( {"username": username.value.trim()}),
+  };
 
   // Realiza la solicitud POST solo si todos los campos son válidos
   if (validUser && validUsername && validPass && validEmail) {
-    fetch(url, options)
-      .then(res => {
-        if (res.status == 200) {
-          alert("Registrado con éxito!!");
-          location.href = "login.html";
+    //Comprueba si el nombre esta disponible para crear la cuenta
+    fetch(urlCheck, optionsCheck)
+      .then(response => {
+        if (response.status == 200) {
+          //Si esta disponible hace el fetch para crear la cuenta
+          fetch(urlRegister, optionsRegister)
+            .then(res => {
+              if (res.status == 200) {
+                alert("Registrado con éxito!!");
+                location.href = "login.html";
+              }
+              return res.json();
+            })
+            .then(response => {
+              if (response.id) {
+                console.log(response.name);
+              } else {
+                alert(response.msg);
+              }
+            })
+        }
+        if (response.status == 409) {
+          alert("Nombre de usuario en uso!")
         }
         return res.json();
       })
-      .then(response => {
-        if (response.id) {
-          console.log(response);
-        } else {
-          console.log(response.msg);
-        }
-      })
+      
   }
 }
+
 
 // Mostrar y ocultar la contraseña
 function showHidePass(e) {

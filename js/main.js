@@ -1,13 +1,5 @@
+let perfil = document.getElementById("perfil");
 
-
-
-// var map = L.map('map').setView([51.505, -0.09], 13);
-
-// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     maxZoom: 19,
-//     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-// }).addTo(map);
-
-// var marker = L.marker([48.5, -0.09]).addTo(map);
-
-// marker.bindPopup("<b>Salida</b><br>C/street").openPopup();
+if( localStorage.getItem("token") ){
+    perfil.innerHTML = "<span class='nav__item-text'><a href='html/perfil.html'>Perfil</a></span>";
+}

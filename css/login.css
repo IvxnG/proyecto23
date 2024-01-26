@@ -46,22 +46,45 @@ body {
     margin: 0 auto;
 }
 
-.my-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    position: relative;
-    gap: 1rem;
-    background-color: var(--white);
-    width: 100%;
-    max-width: 32rem;
-    padding: 3rem 2rem;
-    border-radius: 2rem;
-    height: fit-content;
-}
+    .my-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        position: relative;
+        gap: 1rem;
+        background-color: var(--white);
+        width: 100%;
+        max-width: 32rem;
+        padding: 3rem 2rem;
+        border-radius: 2rem;
+        height: fit-content;
+    }
 
 .my-form__button {
     background-color: var(--primary-light);
+    color: white;
+    white-space: nowrap;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    line-height: 50px;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: .025em;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 800;
+    min-height: 50px;
+    width: 100%;
+    border-radius: 99px;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+}
+
+.my-form__button_cancel {
+    background-color: darkred;
     color: white;
     white-space: nowrap;
     border: none;
@@ -108,6 +131,10 @@ body {
 
 .my-form__button:hover {
     background-color: var(--primary-dark);
+}
+
+.my-form__button_cancel:hover {
+    background-color: red;
 }
 
 .input__wrapper {

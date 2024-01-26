@@ -35,7 +35,7 @@
 }
 .nav__cb:checked ~ .nav__content {
     transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
-    width: 410px;
+    width: 320px;
 }
 .nav__items {
     position: relative;

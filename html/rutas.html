@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="shortcut icon" href="../assets/logo.png" />
   <title>RunAtlas</title>
+  <style>
+    .nav__cb:checked~.nav__content {
+      transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      width: 340px;
+    }
+  </style>
 </head>
 
 <body>
@@ -38,10 +44,7 @@
                     <span class="nav__item-text"><a href="login.html">Log in</a></span>
                   </li>
                   <li class="nav__item">
-                    <span class="nav__item-text"><a href="rutas.html">Rutas</a></span>
-                  </li>
-                  <li class="nav__item">
-                    <span class="nav__item-text"><a href="detalles.html">Detalles</a></span>
+                    <span class="nav__item-text"><a href="subirRuta.html">Subir Ruta </a></span>
                   </li>
                 </ul>
               </div>

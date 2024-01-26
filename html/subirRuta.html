@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Ruta</title>
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/subirRuta.css" />
+    <link rel="shortcut icon" href="../assets/logo.png" />
+    <style>
+        .nav__cb:checked~.nav__content {
+            transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER & MENU -->
+    <div>
+        <div class="header">
+            <nav class="nav">
+                <input type="checkbox" class="nav__cb" id="menu-cb" />
+                <div class="nav__content">
+                    <ul class="nav__items">
+                        <li class="nav__item">
+                            <span class="nav__item-text"><a href="../index.html">Home</a></span>
+                        </li>
+                        <li class="nav__item">
+                            <span class="nav__item-text"><a href="../html/login.html">Log in</a></span>
+                        </li>
+                        <li class="nav__item">
+                            <span class="nav__item-text"><a href="../html/rutas.html">Rutas</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <label class="nav__btn" for="menu-cb"></label>
+            </nav>
+        </div>
+        <br><br><br>
+
+        <form action="../js/subirRuta.js" method="post" class="my-form">
+            <div class="login-welcome-row">
+                <a href="#" title="Logo">
+                    <img src="../assets/logo.png" alt="Logo" class="logo">
+                </a>
+                <h1>Crea un evento &#x1F44F;</h1>
+                <p>Solo archivo .gpx</p>
+            </div>
+            <div class="file-select" id="src-file">
+                <input type="file" name="src-file" aria-label="Archivo">
+            </div>
+            <button type="submit" id="btnGpx" class="my-form__button">
+                Crear
+            </button>
+        </form>
+
+    </div>
+</body>
+
+</html>
