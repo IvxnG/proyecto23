@@ -8,13 +8,13 @@
     <link rel="shortcut icon" href="../assets/logo.png" />
 </head>
 <body>
-    <form class="my-form">
+    <form class="my-form" id="formEdit">
         <div class="login-welcome-row">
             <a href="#" title="Logo">
                 <img src="../assets/logo.png" alt="Logo" class="logo">
             </a>
-            <h1>Edita tus datos &#x1F44B;</h1>
-            <p>Modifica o añade imformación.</p>
+            <h1>Edita tus datos &#x270F;&#xFE0F;</h1>
+            <p>Modifica o añade información.</p>
         </div>
         <div class="input__wrapper">
             <input type="user" id="user" name="user" class="input__field" placeholder="Usuario" required>
@@ -77,7 +77,34 @@
         <button type="submit" id="btnCancel" class="my-form__button_cancel">
             Cancelar
         </button>
+        <button type="submit" id="btnToken" class="my-form__button">
+            Cerrar Sesión
+        </button>
+        <button type="submit" id="btnDelete" class="my-form__button">
+            Borrar Cuenta
+        </button>
     </form>
+
+    <form class="my-form hidden" id="formDelete">
+        <div class="login-welcome-row">
+            <a href="#" title="Logo">
+                <img src="../assets/logo.png" alt="Logo" class="logo">
+            </a>
+            <h1>Escribe la palabra para borrar la cuenta</h1>
+            <p>Se eliminara de forma permanente.</p>
+        </div>
+        <div class="input__wrapper">
+            <input type="text" id="delete_input" name="delete_input" class="input__field" placeholder="CONFIRMAR" required>
+            <label for="delete_input" class="input__label">CONFIRMAR</label>
+        </div>
+        <button type="submit" id="btnConfirmDelete" class="my-form__button">
+           BORRAR
+        </button>
+        <button type="submit" id="btnCancelDelete" class="my-form__button_cancel">
+            CANCELAR
+        </button>
+    </form>
+
     <script src="../js/perfil.js"></script>
 </body>
 </html>
