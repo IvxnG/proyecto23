@@ -3,7 +3,7 @@ const url = `http://localhost:3000/api/user/username/${localStorage.getItem("use
 const urlCheck = 'http://localhost:3000/api/user/check'
 const urlDelete = `http://localhost:3000/api/user/username/${localStorage.getItem("username")}`;
 
-// Verifica si hay un token en localStorage antes de realizar la solicitud
+// Verifica si hay un token en localStorage antes de realizar la solicitud de los datos del usuario
 if (localStorage.getItem("token")) {
 
   // Configura las opciones para la solicitud fetch
@@ -12,7 +12,7 @@ if (localStorage.getItem("token")) {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  // Realiza la solicitud fetch para rellenar con datos del usuario
+  // Realiza la solicitud fetch para rellenar el formulario con datos del usuario
   fetch(url, options)
     .then(res => {
       if (res.status == 200) {
@@ -50,6 +50,7 @@ let btnToken = document.getElementById("btnToken");
 let btnDelete = document.getElementById("btnDelete");
 let btnConfirmDelete = document.getElementById("btnConfirmDelete");
 let btnCancelDelete = document.getElementById("btnCancelDelete");
+let delete_input = document.getElementById("delete_input");
 
 // Asigna eventos a los botones
 btnEdit.addEventListener("click", editPerfil);
@@ -101,9 +102,9 @@ function editPerfil(e) {
 
 }
 
-function showDeleteForm(e){
+//Muestra u oculta la confirmacion para borarr la cuenta
+function showDeleteForm(e) {
   e.preventDefault();
-  console.log("object");
 
   formEdit.classList.toggle("hidden");
   formDelete.classList.toggle("hidden");
@@ -114,22 +115,29 @@ function deleteUser(e) {
   e.preventDefault();
   console.log("borrar user e ir index");
 
-  fetch(urlDelete)
-    .then(res => {
-      console.log(res);
-      // Maneja la respuesta del servidor
-      if (res.status == 200) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        alert("Cuenta borrada con éxito!");
-        //location.href = "../index.html";
-      }
-      // Maneja el caso en el que no existe el usuario (código 404)
-      if (res.status == 404) {
-        alert("Usuario no existente!");
-        location.href = "../index.html";
-      }
-    });
+  //Si escribe la palabea de forma correcta confirma para borra el user
+  if(delete_input.value.trim() == "CONFIRMAR"){
+    console.log("SI");
+    // fetch(urlDelete)
+    // .then(res => {
+    //   console.log(res);
+    //   // Maneja la respuesta del servidor
+    //   if (res.status == 200) {
+    //     localStorage.removeItem("token");
+    //     localStorage.removeItem("username");
+    //     alert("Cuenta borrada con éxito!");
+    //     //location.href = "../index.html";
+    //   }
+    //   // Maneja el caso en el que no existe el usuario (código 404)
+    //   if (res.status == 404) {
+    //     alert("Usuario no existente!");
+    //     location.href = "../index.html";
+    //   }
+    // });
+  }else{
+    console.log("No");
+  }
+  
 }
 
 // Mostrar y ocultar la contraseña
