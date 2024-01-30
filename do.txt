@@ -1,0 +1,26 @@
+-Log in 
+    x Mostrar ocultar contraseña
+    x Comprobar si existe usuario
+    x Iniciar sesion
+    x Almacenar nombre y token
+-Registro
+    x Comprobacion de campos con RegExp
+    x Nombre de usuario disponible
+    x Campos opcionales
+    x Si los campos no son validos no registra
+-Perfil
+    x Cerrar sesion
+    x Borrar localStorage
+    Editar datos
+    Si cambia nombre comprobar que es valido
+    Eliminar cuenta
+-Main
+    Si exite la sesion cambian el menu
+-Rutas
+    Lista todas las Rutas
+    Pagina los resultados
+-Detalles
+    Muestra los Detalles
+    crea el mapa de la Rutas
+-Subir Ruta
+    ¿?

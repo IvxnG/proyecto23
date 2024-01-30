@@ -4,7 +4,6 @@ const url = 'http://localhost:3000/api/auth/login';
 // Obtención de referencias a elementos del DOM
 let loginForm = document.querySelector(".my-form");
 let btnLog = document.getElementById("btnLog");
-let btnToken = document.getElementById("btnToken");
 let btnHome = document.getElementById("btnHome");
 let passIcon = document.getElementById("passIcon");
 let pass = document.getElementById("password");
@@ -12,15 +11,7 @@ let pass = document.getElementById("password");
 // Asignación de eventos a los elementos del formulario
 passIcon.addEventListener("click", showHidePass);
 btnLog.addEventListener("click", logUser);
-btnToken.addEventListener("click", borrarToken);
 btnHome.addEventListener("click", home);
-
-// Función para borrar el token almacenado en el localStorage
-function borrarToken() {
-  console.log("Borrado el token");
-  localStorage.removeItem("token");
-  localStorage.removeItem("user ");
-}
 
 // Función para redirigir a la página principal
 function home() {
@@ -67,7 +58,7 @@ function logUser(e) {
               console.log(response);
               // Almacena el token en el localStorage y redirige a la página principal
               localStorage.setItem("token", response.token);
-              localStorage.setItem("user", response.username);
+              localStorage.setItem("username", response.username);
               location.href = '../index.html';
             })
         }
@@ -88,4 +79,21 @@ function showHidePass(e) {
   } else {
     pass.type = "password"
   }
+}
+
+
+//Depuracion !!!!!!!!!!!!borrar!!!!!!!!!!!
+let users = document.getElementById("users");
+users.addEventListener("click" , usersAll)
+
+function usersAll(e) {
+  e.preventDefault();
+
+  fetch('http://localhost:3000/api/user/all')
+      .then(res => {
+        return res.json();
+      })
+      .then( data => {
+        console.log(data);
+      })
 }
