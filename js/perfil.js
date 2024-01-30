@@ -1,7 +1,7 @@
 // Define la URL para la solicitud GET utilizando el username almacenado en localStorage y otras URL
-const url = `http://localhost:3000/api/user/username/${localStorage.getItem("username")}`;
-const urlCheck = 'http://localhost:3000/api/user/check'
-const urlDelete = `http://localhost:3000/api/user/username/${localStorage.getItem("username")}`;
+const url = `http://localhost:3333/api/user/username/${localStorage.getItem("username")}`;
+const urlCheck = 'http://localhost:3333/api/user/check'
+const urlDelete = `http://localhost:3333/api/user/username/${localStorage.getItem("username")}`;
 
 // Verifica si hay un token en localStorage antes de realizar la solicitud de los datos del usuario
 if (localStorage.getItem("token")) {
@@ -19,7 +19,7 @@ if (localStorage.getItem("token")) {
         // Procesa la respuesta JSON y actualiza los campos en la página
         return res.json()
           .then(response => {
-            document.getElementById("user").value = response.user;
+            document.getElementById("user").value = response.name;
             document.getElementById("username").value = response.username;
             document.getElementById("email").value = response.mail;
             document.getElementById("password").value = response.pass;
@@ -30,12 +30,16 @@ if (localStorage.getItem("token")) {
       }
       // Maneja el caso en el que no existe el usuario (código 404)
       if (res.status == 404) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
         alert("Usuario no existente!");
         location.href = "../index.html";
       }
     });
 } else {
   //redirige a la landing page si no esta logeado
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
   location.href = "../index.html";
 }
 
@@ -102,7 +106,7 @@ function editPerfil(e) {
 
 }
 
-//Muestra u oculta la confirmacion para borarr la cuenta
+//Muestra u oculta la confirmacion para borrar la cuenta
 function showDeleteForm(e) {
   e.preventDefault();
 
@@ -110,7 +114,11 @@ function showDeleteForm(e) {
   formDelete.classList.toggle("hidden");
 }
 
-//Borrar la cuenta del usurio (debe tener sesion iniciada)
+//Borrar la cuenta del usuario (debe tener sesion iniciada)
+let optionsDelete = {
+  method: 'DELETE',
+};
+
 function deleteUser(e) {
   e.preventDefault();
   console.log("borrar user e ir index");
@@ -118,24 +126,26 @@ function deleteUser(e) {
   //Si escribe la palabea de forma correcta confirma para borra el user
   if(delete_input.value.trim() == "CONFIRMAR"){
     console.log("SI");
-    // fetch(urlDelete)
-    // .then(res => {
-    //   console.log(res);
-    //   // Maneja la respuesta del servidor
-    //   if (res.status == 200) {
-    //     localStorage.removeItem("token");
-    //     localStorage.removeItem("username");
-    //     alert("Cuenta borrada con éxito!");
-    //     //location.href = "../index.html";
-    //   }
-    //   // Maneja el caso en el que no existe el usuario (código 404)
-    //   if (res.status == 404) {
-    //     alert("Usuario no existente!");
-    //     location.href = "../index.html";
-    //   }
-    // });
+    fetch(urlDelete, optionsDelete)
+    .then(res => {
+      console.log(res);
+      // Maneja la respuesta del servidor
+      if (res.status == 200) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        alert("Cuenta borrada con éxito!");
+        location.href = "../index.html";
+      }
+      // Maneja el caso en el que no existe el usuario (código 404)
+      if (res.status == 404) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        alert("Usuario no existente!");
+        location.href = "../index.html";
+      }
+    });
   }else{
-    console.log("No");
+    alert("Palabra incorrecta!")
   }
   
 }

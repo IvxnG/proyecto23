@@ -47,7 +47,6 @@ let container = document.getElementById("card_container");
 rutas.forEach( ruta => {
     container.innerHTML += `
                         <div class="card">
-                                
                                 <div class="card_content">
                                     <h3 class="card_title">${ruta.title}</h3>
                                     <p class="card_description">${ruta.description}

@@ -1,5 +1,5 @@
 // Definición de la URL del servidor para la autenticación
-const url = 'http://localhost:3000/api/auth/login';
+const url = 'http://localhost:3333/api/auth/login';
 
 // Obtención de referencias a elementos del DOM
 let loginForm = document.querySelector(".my-form");
@@ -36,7 +36,7 @@ function logUser(e) {
 
     // Crea un objeto con los datos del usuario
     let userData = {
-      username: user.value.trim(),
+      username: username.value.trim(),
       pass: pass.value.trim(),
     }
 
@@ -89,7 +89,7 @@ users.addEventListener("click" , usersAll)
 function usersAll(e) {
   e.preventDefault();
 
-  fetch('http://localhost:3000/api/user/all')
+  fetch('http://localhost:3333/api/user/all')
       .then(res => {
         return res.json();
       })

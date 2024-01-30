@@ -1,6 +1,6 @@
 // Definición de la URL del servidor para creae el usuario
-const urlRegister = 'http://localhost:3000/api/user/register';
-const urlCheck = 'http://localhost:3000/api/user/check';
+const urlRegister = 'http://localhost:3333/api/user/register';
+const urlCheck = 'http://localhost:3333/api/user/check';
 
 // Selecciona elementos del DOM
 let createForm = document.querySelector(".my-form");
