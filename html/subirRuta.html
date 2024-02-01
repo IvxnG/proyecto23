@@ -7,6 +7,7 @@
     <title>Subir Ruta</title>
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/subirRuta.css" />
     <link rel="shortcut icon" href="../assets/logo.png" />
     <style>
@@ -41,7 +42,7 @@
         </div>
         <br><br><br>
 
-        <form action="../js/subirRuta.js" method="post" class="my-form">
+        <form  method="post" class="my-form" id="formGpx">
             <div class="login-welcome-row">
                 <a href="#" title="Logo">
                     <img src="../assets/logo.png" alt="Logo" class="logo">
@@ -49,8 +50,24 @@
                 <h1>Crea un evento &#x1F44F;</h1>
                 <p>Solo archivo .gpx</p>
             </div>
-            <div class="file-select" id="src-file">
-                <input type="file" name="src-file" aria-label="Archivo">
+            
+            <input type="file" accept=".gpx" id="inputGPX">
+
+            <div class="input__wrapper">
+                <input type="text" id="nombre" name="nombre" class="input__field" placeholder="Nombre Evento" required>
+                <label for="nombre" class="input__label">Nombre Evento</label>
+            </div>
+            <div class="input__wrapper">
+                <input type="text" id="desnivelPos" name="desnivelPos" class="input__field" placeholder="Desnivel Pos." required>
+                <label for="desnivelPos" class="input__label">Desnivel Pos.</label>
+            </div>
+            <div class="input__wrapper">
+                <input type="text" id="desnivelNeg" name="desnivelNeg" class="input__field" placeholder="Desnivel Neg." required>
+                <label for="desnivelNeg" class="input__label">Desnivel Neg.</label>
+            </div>
+            <div class="input__wrapper">
+                <input type="text" id="desnivel" name="desnivel" class="input__field" placeholder="Desnivel" required>
+                <label for="desnivel" class="input__label">Desnivel.</label>
             </div>
             <button type="submit" id="btnGpx" class="my-form__button">
                 Crear
@@ -59,5 +76,7 @@
 
     </div>
 </body>
+<script src="../js/togeojson.js"></script>
+<script src="../js/subirRuta.js"></script>
 
 </html>
