@@ -42,7 +42,7 @@
         </div>
         <br><br><br>
 
-        <form  method="post" class="my-form" id="formGpx">
+        <form method="post" class="my-form" id="formGpx">
             <div class="login-welcome-row">
                 <a href="#" title="Logo">
                     <img src="../assets/logo.png" alt="Logo" class="logo">
@@ -50,7 +50,7 @@
                 <h1>Crea un evento &#x1F44F;</h1>
                 <p>Solo archivo .gpx</p>
             </div>
-            
+
             <input type="file" accept=".gpx" id="inputGPX">
 
             <div class="input__wrapper">
@@ -58,16 +58,39 @@
                 <label for="nombre" class="input__label">Nombre Evento</label>
             </div>
             <div class="input__wrapper">
-                <input type="text" id="desnivelPos" name="desnivelPos" class="input__field" placeholder="Desnivel Pos." required>
+                <input type="text" id="distancia" name="distancia" class="input__field" placeholder="Distancia en metros" required>
+                <label for="distancia" class="input__label">Distancia (m)</label>
+            </div>
+            <div class="input__wrapper">
+                <input type="text" id="desnivelPos" name="desnivelPos" class="input__field" placeholder="Desnivel Pos."
+                    required readonly>
                 <label for="desnivelPos" class="input__label">Desnivel Pos.</label>
             </div>
             <div class="input__wrapper">
-                <input type="text" id="desnivelNeg" name="desnivelNeg" class="input__field" placeholder="Desnivel Neg." required>
+                <input type="text" id="desnivelNeg" name="desnivelNeg" class="input__field" placeholder="Desnivel Neg."
+                    required readonly>
                 <label for="desnivelNeg" class="input__label">Desnivel Neg.</label>
             </div>
             <div class="input__wrapper">
-                <input type="text" id="desnivel" name="desnivel" class="input__field" placeholder="Desnivel" required>
+                <input type="text" id="desnivel" name="desnivel" class="input__field" placeholder="Desnivel" required
+                    readonly>
                 <label for="desnivel" class="input__label">Desnivel.</label>
+            </div>
+            <div class="input__wrapper">
+                <label for="categoria">Categoria :</label>
+                <select name="categoria" id="categoria">
+                    <option value="juvenil">Juvenil (- 18 años)</option>
+                    <option value="adultos">Adultos (18 a 65)</option>
+                    <option value="senior">Senior (65+)</option>
+                </select>
+            </div>
+            <div class="input__wrapper">
+                <label for="comunidad">Comunidad :</label>
+                <select name="comunidad" id="comunidad"></select>
+            </div>
+            <div class="input__wrapper">
+                <label for="provincia">Provincia :</label>
+                <select name="provincia" id="provincia"></select>
             </div>
             <button type="submit" id="btnGpx" class="my-form__button">
                 Crear
@@ -77,6 +100,8 @@
     </div>
 </body>
 <script src="../js/togeojson.js"></script>
+<script src="../js/data.js"></script>
 <script src="../js/subirRuta.js"></script>
+
 
 </html>

@@ -12,15 +12,22 @@
     x Cerrar sesion
     x Borrar localStorage
     Editar datos
-    Si cambia nombre comprobar que es valido
-    Eliminar cuenta
+    ¿? Si cambia nombre comprobar que es valido
+    x Eliminar cuenta
 -Main
-    Si exite la sesion cambian el menu
+    x Si exite la sesion cambian el menu
 -Rutas
-    Lista todas las Rutas
+    x Lista todas las Rutas
     Pagina los resultados
+    - filtros de buaqueda
+        filtro nombre
+        filtro localidad
+        filtro texto
 -Detalles
-    Muestra los Detalles
+    x Muestra los Detalles
     crea el mapa de la Rutas
 -Subir Ruta
-    ¿?
+    x/2 subir gpx
+    guardar coords
+    x/2 mas datos
+-Comporbsar token

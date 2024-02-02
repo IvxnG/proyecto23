@@ -244,3 +244,10 @@ body {
 .hidden{
     display: none;
 }
+
+#categoria, #comunidad, #provincia{
+    width: 100%;
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding:10px 5px  ;
+}
