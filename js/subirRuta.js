@@ -110,7 +110,6 @@ function saveData(e) {
 }
 
 
-
 //Comprobar que el nombre del evento es valido
 function checkName(e) {
     e.preventDefault();
@@ -161,7 +160,6 @@ function cargarComunidad() {
             });
         }
     });
-    console.log("Selección actual - Comunidad : Provincia -", comunidad.value + " : " + provincia.value);
 }
 
 cargarComunidad();
