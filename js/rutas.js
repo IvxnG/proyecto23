@@ -6,7 +6,7 @@ let options = {
 };
 
 let card_container = document.getElementById("card_container");
-
+let marker;
 fetch(url, options)
     .then(res => {
         if (res.status == 200) {
@@ -18,7 +18,11 @@ fetch(url, options)
                                 if (res.status == 200) {
                                     return res.json()
                                         .then(ruta => {
-                                            console.log(ruta);
+                                            marker = L.marker(ruta.coords[0]).addTo(map);
+                                            marker.bindPopup(`<form action="detalles.html" method="get" name="form_id">
+                                                                <input type="hidden" name="id" value="${ruta.id}">
+                                                                <input style="background-color:#cdeb9b; color:#126255; "type="submit" value="${ruta.evento}">
+                                                            </form>`).openPopup();
                                             card_container.innerHTML += `
                                                                         <div class="card">
                                                                             <div class="card_content">
@@ -29,7 +33,7 @@ fetch(url, options)
                                                                                 <p class="card_location"><b>Provincia</b> : ${ruta.provincia}</p>
                                                                                 <form action="detalles.html" method="get" name="form_id">
                                                                                     <input type="hidden" name="id" value="${ruta.id}">
-                                                                                    <input type="submit" value="Más Info.">
+                                                                                    <input style="background-color:#cdeb9b; color:#126255;" type="submit" value="Más Info.">
                                                                                 </form>
                                                                             </div>
                                                                         </div>`;
@@ -44,3 +48,10 @@ fetch(url, options)
             alert("Error en la carga. Intentelo de nuevo.");
         }
     })
+
+let map = L.map('map').setView([40.416775, -3.703790], 6);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
