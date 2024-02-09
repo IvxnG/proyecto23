@@ -19,15 +19,18 @@
 -Rutas
     x Lista todas las Rutas
     Pagina los resultados
-    - filtros de buaqueda
+    - filtros de busqueda
         filtro nombre
         filtro localidad
         filtro texto
 -Detalles
-    x Muestra los Detalles
-    crea el mapa de la Rutas
+     x Muestra los Detalles
+     x crea el mapa de la Rutas
 -Subir Ruta
-    x/2 subir gpx
-    guardar coords
-    x/2 mas datos
+    x subir gpx
+    x guardar coords
+    x mas datos
+    comprobar datos validos
+    añadir fecha
+    editar datos
 -Comporbsar token

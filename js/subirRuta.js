@@ -1,3 +1,6 @@
+//URL crear carrera
+const url = 'http://localhost:3333/api/race/new';
+
 // Obtener elementos del DOM
 let inputGPX = document.getElementById("inputGPX");
 let formGpx = document.getElementById("formGpx");
@@ -5,8 +8,21 @@ let btnGpx = document.getElementById("btnGpx");
 let comunidad = document.getElementById("comunidad");
 let provincia = document.getElementById("provincia");
 let categoria = document.getElementById("categoria");
+let distancia = document.getElementById("distancia");
+let nombre = document.getElementById("nombre");
 
-// Agregar escuchadores de eventos
+let coordenadas = [];
+
+//Variables validaciòn
+let validGpx = false;
+let validName = false;
+let validDist = false;
+
+// Añade listeners de eventos a elementos del formulario
+nombre.addEventListener("blur", checkName);
+distancia.addEventListener("blur", checkDistancia);
+
+// Agregar listeners
 formGpx.addEventListener("change", processGpx);
 btnGpx.addEventListener("click", saveData);
 
@@ -17,6 +33,7 @@ function processGpx() {
 
     // Verificar si se seleccionó un archivo
     if (file) {
+        validGpx = true;
         const fileReader = new FileReader();
         fileReader.onload = event => {
             const textContent = event.target.result;
@@ -39,7 +56,7 @@ function processGpx() {
             formGpx.elements.desnivel.value = (values.pos + values.neg).toFixed(2);
 
             // Extraer y mostrar coordenadas, seleccionando una de cada 250
-            let coordenadas = [];
+
             let trkpts = xmlDoc.querySelectorAll('trkpt');
 
             trkpts.forEach(function (trkpt, index) {
@@ -52,20 +69,66 @@ function processGpx() {
                     coordenadas.push({ lat: latitud, lon: longitud });
                 }
             });
-            // Mostrar coordenadas en la consola
-            console.log(coordenadas);
         };
+
         fileReader.readAsText(file);
+        return coordenadas;
     }
 }
 
-// Función para manejar datos del formulario al hacer clic en el botón
 function saveData(e) {
     e.preventDefault();
+    //validDist && validName && validGpx
+    if (true) {
+        let options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                "evento" : nombre.value,
+                "distancia" : distancia.value,
+                "desPos" : formGpx.elements.desnivelPos.value,
+                "desNeg" : formGpx.elements.desnivelNeg.value,
+                "desnivel" : formGpx.elements.desnivel.value,
+                "coords" : coordenadas,
+                "categoria" : formGpx.elements.categoria.value,
+                "comunidad" : formGpx.elements.comunidad.value,
+                "provincia" : formGpx.elements.provincia.value,
+            }),
+        };
 
-    console.log("Desnivel Negativo:", formGpx.elements.desnivelNeg.value);
-    console.log("Desnivel Positivo:", formGpx.elements.desnivelPos.value);
-    console.log("Desnivel Total:", formGpx.elements.desnivel.value);
+        fetch(url, options)
+            .then(response => {
+                if (response.status == 200) {
+                    alert("Evento creado con exito!!")
+                }
+                return response.json();
+            })
+            .then( data => {
+                console.log(data);
+            })
+    }
+}
+
+
+//Comprobar que el nombre del evento es valido
+function checkName(e) {
+    e.preventDefault();
+    if (true) {
+        validName = true
+    } else {
+        validName = false;
+        console.log("No name");
+    }
+}
+
+function checkDistancia(e) {
+    e.preventDefault();
+    if (/^[0-9]*$/.test(distancia.value)) {
+        validDist = true
+    } else {
+        validDist = false;
+        console.log("No dist");
+    }
 }
 
 // Mostrar datos correspondientes a las comunidades en el elemento "comunidad" del formulario
@@ -97,7 +160,6 @@ function cargarComunidad() {
             });
         }
     });
-    console.log("Selección actual - Comunidad : Provincia -", comunidad.value + " : " + provincia.value);
 }
 
 cargarComunidad();

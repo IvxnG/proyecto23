@@ -1,65 +1,69 @@
 let form_id = window.location.search;
-form_id = Number(form_id.slice(4,));
-console.log(form_id);
+form_id = form_id.slice(4,);
+let map = "";
+let waypoints;
+
+let url = `http://localhost:3333/api/race/${form_id}`;
+let options = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+};
 
 let detalles = document.getElementById("detalles")
 
-rutas.forEach(element => {
-    if (element.id == form_id) {
-        detalles.innerHTML = `
-        <section class="first">
-            <h2>Información General</h2>
-            <p><strong>Nombre:</strong> ${element.title}</p>
-            <p><strong>Fecha:</strong> ${element.date}</p>
-            <p><strong>Lugar:</strong> ${element.location}</p>
-            <p><strong>Distancia:</strong> ${element.title}</p>
-        </section>
-  
-        <section>
-            <h2>Ubicación en el Mapa</h2>
-            <div class="map-container">
-            <div id="map"></div>
-            </div>
-        </section>
-    
-        <section>
-            <h2>Inscripción</h2>
-            <p><strong>Costo de Inscripción:</strong> [Costo]</p>
-        </section>
-    
-        <section>
-            <h2>Ruta</h2>
-            <p>Descripción de la ruta, puntos de interés, etc.</p>
-        </section>
-        `;
-    }
-})
+fetch(url, options)
+    .then(res => {
+        if (res.status == 200) {
+            return res.json()
+                .then(ruta => {
+                    waypoints = ruta.coords
+                    detalles.innerHTML = `
+                                            <section class="first">
+                                                <h2>Información General</h2>
+                                                <p><strong>Nombre:</strong> ${ruta.evento}</p>
+                                                <p><strong>Categoria:</strong> ${ruta.categoria}</p>
+                                                <p><strong>Lugar:</strong> ${ruta.provincia}, ${ruta.comunidad}</p>
+                                                <p><strong>Distancia:</strong> ${ruta.distancia} mts</p>
+                                            </section>
+                                        
+                                            <section>
+                                                <h2>Ubicación en el Mapa</h2>
+                                                <div class="map-container">
+                                                <div id="map"></div>
+                                                </div>
+                                            </section>
+                                            
+                                            <section>
+                                                <h2>Detalles</h2>
+                                                <p><strong>Desnivel : </strong> ${ruta.desnivel} mts</p>
+                                                <p><strong>Desnivel Positivo : </strong> ${ruta.desPos} mts</p>
+                                                <p><strong>Desnivel Negativo : </strong> ${ruta.desNeg} mts</p>
+                                            </section>
+                                            `;
 
-var map = L.map('map').setView([51.505, -0.09], 13);
+                    map = L.map('map').setView(ruta.coords[0], 10);
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
 
- let waypoints = [
-    L.latLng(57.74, 11.94),
-    L.latLng(58.74, 12.94),
-  ]
+                    let inicio = L.marker(ruta.coords[0]).addTo(map);
+                    inicio.bindPopup("<b>Inicio</b><br>").openPopup();
 
-  console.log(waypoints);
-console.log("asdggjkf");
+                    let fin = L.marker(ruta.coords[ruta.coords.length - 1]).addTo(map);
+                    fin.bindPopup("<b>Fin</b><br>");
 
-waypoints.push({ lat: 60.74, lng: 15.94 })
+                    L.polyline(
+                        ruta.coords,
+                        {color : "green"}
+                    ).addTo(map);
 
-console.log(waypoints);
 
-L.Routing.control({
-    waypoints,
-    routeWhileDragging: false
-  }).addTo(map);
+                })
+        } else {
+            alert("Error en la carga. Intentelo de nuevo.");
+        }
+    })
 
-// var marker = L.marker([48.5, -0.09]).addTo(map);
-
-// marker.bindPopup("<b>Salida</b><br>C/street").openPopup();
 
