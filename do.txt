@@ -34,3 +34,5 @@
     añadir fecha
     editar datos
 -Comporbsar token
+-function token
+-funciones admin

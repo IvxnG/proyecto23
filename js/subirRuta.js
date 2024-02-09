@@ -79,7 +79,7 @@ function processGpx() {
 function saveData(e) {
     e.preventDefault();
     //validDist && validName && validGpx
-    if (true) {
+    if (validDist && validName) {
         let options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -106,15 +106,20 @@ function saveData(e) {
             .then( data => {
                 console.log(data);
             })
+    }else{
+        alert("Datos no validos")
     }
 }
 
 
-//Comprobar que el nombre del evento es valido
 function checkName(e) {
     e.preventDefault();
-    if (true) {
-        validName = true
+    // Expresión regular para verificar si solo hay letras (mayúsculas o minúsculas) y espacios
+    const regex = /^[a-zA-Z\s]+$/;
+    const name = e.target.value.trim(); // Obtener el valor del campo de entrada y eliminar los espacios en blanco al principio y al final
+    
+    if (regex.test(name)) {
+        validName = true;
     } else {
         validName = false;
         console.log("No name");
@@ -123,13 +128,18 @@ function checkName(e) {
 
 function checkDistancia(e) {
     e.preventDefault();
-    if (/^[0-9]*$/.test(distancia.value)) {
-        validDist = true
+    // Expresión regular para verificar si solo hay dígitos del 0 al 9
+    const regex = /^\d+$/;
+    const distancia = e.target.value.trim(); // Obtener el valor del campo de entrada y eliminar los espacios en blanco al principio y al final
+    
+    if (regex.test(distancia)) {
+        validDist = true;
     } else {
         validDist = false;
         console.log("No dist");
     }
 }
+
 
 // Mostrar datos correspondientes a las comunidades en el elemento "comunidad" del formulario
 comunidades2.forEach(elem => {

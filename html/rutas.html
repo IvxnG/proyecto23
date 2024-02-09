@@ -23,6 +23,10 @@
       border: solid 1em #126255;
       border-radius: 20px;
     }
+
+    .input__field{
+      background-color: greenyellow;
+    }
   </style>
 </head>
 
@@ -53,7 +57,32 @@
       <br /><br /><br />
       <center><h1 class="color2">MAPA UBICACION DE LAS RUTAS</h1></center>
       <center> <div id="map"></div></center><br><br>
-      <input type="text" class="input__field" id="filter1">
+      <center><input type="text" class="input__field" id="filter1" placeholder="Nombre">
+        <input type="number" class="input__field" id="filterDistanciaMinima"  placeholder="Distacia Minima">
+        <input type="text" class="input__field" id="filterDistanciaMaxima" placeholder="Distancia máxima">
+  
+        <select name="comunidades" id="filterComunidad">
+          <option value="todas">Todas</option>
+          <option value="Andalucía">Andalucía</option>
+          <option value="Aragón">Aragón</option>
+          <option value="Asturias">Asturias</option>
+          <option value="Baleares">Baleares</option>
+          <option value="Canarias">Canarias</option>
+          <option value="Cantabria">Cantabria</option>
+          <option value="Castilla-La Mancha">Castilla-La Mancha</option>
+          <option value="Castilla y León">Castilla y León</option>
+          <option value="Cataluña">Cataluña</option>
+          <option value="Extremadura">Extremadura</option>
+          <option value="galicia">Galicia</option>
+          <option value="Madrid">Madrid</option>
+          <option value="Murcia">Murcia</option>
+          <option value="Navarra">Navarra</option>
+          <option value="País Vasco">País Vasco</option>
+          <option value="lLa Rioja">La Rioja</option>
+          <option value="comunidad_valenciana">Comunidad Valenciana</option>
+      </select></center>
+      
+
       <center><h1 class="color2">TODAS LAS RUTAS</h1></center>
       <div class="card_container" id="card_container">
 
@@ -73,6 +102,11 @@
 
 
         <!-- Container -->
+      </div>
+      <!-- Paginación -->
+      <div class="pagination" id="paginacion">
+        <button id="paginaAnterior" onclick="paginaAnterior()">Anterior</button>
+        <button id="paginaSiguiente" onclick="paginaSiguiente()">Siguiente</button>
       </div>
 
     </div>
