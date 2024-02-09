@@ -124,3 +124,20 @@ video{
     color: #555;
   }
   
+  .input__field {
+    font-size: 1.5rem;
+    color: black;
+    padding: 6px 0px;
+    padding-right: 32px;
+    padding-bottom: 8px;
+    line-height: 2rem;
+    height: 2rem;
+    outline: 0px;
+    border: 0px;
+    width: 25%;
+    vertical-align: middle;
+    padding-bottom: 0.7rem;
+    border-bottom: 3px solid var(--secondary);
+    background: #126255;
+    transition: border-color 0.2s;
+}
