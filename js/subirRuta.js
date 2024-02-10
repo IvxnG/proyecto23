@@ -10,6 +10,7 @@ let provincia = document.getElementById("provincia");
 let categoria = document.getElementById("categoria");
 let distancia = document.getElementById("distancia");
 let nombre = document.getElementById("nombre");
+let date = document.getElementById("date");
 
 let coordenadas = [];
 
@@ -93,6 +94,7 @@ function saveData(e) {
                 "categoria" : formGpx.elements.categoria.value,
                 "comunidad" : formGpx.elements.comunidad.value,
                 "provincia" : formGpx.elements.provincia.value,
+                "date" : formGpx.elements.date.value,
             }),
         };
 
@@ -100,11 +102,15 @@ function saveData(e) {
             .then(response => {
                 if (response.status == 200) {
                     alert("Evento creado con exito!!")
+                    return response.json();
+                } else {
+                    throw new Error("Error al guardar los datos.");
                 }
-                return response.json();
+                
             })
             .then( data => {
                 console.log(data);
+                location.href = "../html/rutas.html";
             })
     }else{
         alert("Datos no validos")

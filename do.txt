@@ -3,6 +3,7 @@
     x Comprobar si existe usuario
     x Iniciar sesion
     x Almacenar nombre y token
+    almacena rol
 -Registro
     x Comprobacion de campos con RegExp
     x Nombre de usuario disponible
@@ -16,13 +17,14 @@
     x Eliminar cuenta
 -Main
     x Si exite la sesion cambian el menu
+    si es org sube rutas
 -Rutas
     x Lista todas las Rutas
     Pagina los resultados
-    - filtros de busqueda
-        filtro nombre
-        filtro localidad
-        filtro texto
+    - x filtros de busqueda
+        x filtro nombre
+        x filtro localidad
+        x filtro dist max y min
 -Detalles
      x Muestra los Detalles
      x crea el mapa de la Rutas
@@ -30,9 +32,9 @@
     x subir gpx
     x guardar coords
     x mas datos
-    comprobar datos validos
+    x comprobar datos validos
     añadir fecha
     editar datos
 -Comporbsar token
 -function token
--funciones admin
+-funciones org

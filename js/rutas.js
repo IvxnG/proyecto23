@@ -16,7 +16,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 function actualizarMapa(rutas) {
     // Limpiar todas las marcas del mapa
-    map.eachLayer(function(layer) {
+    map.eachLayer(function (layer) {
         if (layer instanceof L.Marker) {
             map.removeLayer(layer);
         }
@@ -34,7 +34,7 @@ function actualizarMapa(rutas) {
 
 function cargarRutas() {
     cardContainer.innerHTML = "";
-    
+
     fetch(urlAllRaces, options)
         .then(res => {
             if (res.status === 200) {
@@ -60,27 +60,27 @@ function cargarRutas() {
                         const comunidadFiltro = filterComunidad.value.trim().toLowerCase();
                         const distanciaMinima = parseInt(filterDistanciaMinima.value.trim()); // Convertir a entero
                         const distanciaMaxima = parseInt(filterDistanciaMaxima.value.trim()); // Convertir a entero
-                        
+
                         const coincideNombre = nombreFiltro === "" || (ruta.evento && ruta.evento.toLowerCase().includes(nombreFiltro));
-                        
+
                         // Verificar si se debe aplicar el filtro por comunidad autónoma
                         let coincideComunidad = true;
                         if (comunidadFiltro !== "todas") {
                             coincideComunidad = (ruta.comunidad && ruta.comunidad.toLowerCase().includes(comunidadFiltro));
                         }
-                        
+
                         // Verificar si se debe aplicar el filtro por distancia mínima
                         let cumpleDistanciaMinima = true;
                         if (!isNaN(distanciaMinima)) {
                             cumpleDistanciaMinima = ruta.distancia >= distanciaMinima;
                         }
-                        
+
                         // Verificar si se debe aplicar el filtro por distancia máxima
                         let cumpleDistanciaMaxima = true;
                         if (!isNaN(distanciaMaxima)) {
                             cumpleDistanciaMaxima = ruta.distancia <= distanciaMaxima;
                         }
-                        
+
                         if (coincideNombre && coincideComunidad && cumpleDistanciaMinima && cumpleDistanciaMaxima) {
                             return ruta; // Devuelve la ruta si pasa los filtros
                         } else {
@@ -88,12 +88,18 @@ function cargarRutas() {
                         }
                     });
             });
-            
+
             return Promise.all(promises);
         })
         .then(rutas => {
             const rutasFiltradas = rutas.filter(ruta => ruta !== null);
             if (rutasFiltradas.length === 0) {
+                // Limpiar todas las marcas del mapa
+                map.eachLayer(function (layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
                 // Si no hay rutas que cumplan los filtros, agregar texto explicativo
                 cardContainer.innerHTML = "<p>No hay rutas que cumplan los filtros seleccionados.</p>";
             } else {
@@ -109,15 +115,13 @@ function cargarRutas() {
 }
 
 
-
-
 function mostrarRuta(ruta) {
     const marker = L.marker(ruta.coords[0]).addTo(map);
     marker.bindPopup(`<form action="detalles.html" method="get" name="form_id">
                         <input type="hidden" name="id" value="${ruta.id}">
                         <input style="background-color:#cdeb9b; color:#126255; "type="submit" value="${ruta.evento}">
                     </form>`).openPopup();
-    
+
     cardContainer.innerHTML += `
         <div class="card">
             <div class="card_content">
@@ -125,7 +129,7 @@ function mostrarRuta(ruta) {
                 <p class="card_distance" <b>Distancia</b> : ${ruta.distancia} mts</p>
                 <p class="card_cat"><b>Categoria</b>: ${ruta.categoria}</p>
                 <p class="card_location"><b>Comunidad</b> : ${ruta.comunidad}</p>
-                <p class="card_location"><b>Provincia</b> : ${ruta.provincia}</p>
+                <p class="card_location"><b>Fecha</b> : ${ruta.date}</p>
                 <form action="detalles.html" method="get" name="form_id">
                     <input type="hidden" name="id" value="${ruta.id}">
                     <input style="background-color:#cdeb9b; color:#126255;" type="submit" value="Más Info.">

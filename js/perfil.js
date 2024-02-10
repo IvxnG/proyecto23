@@ -133,6 +133,7 @@ function deleteUser(e) {
       if (res.status == 200) {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
+        localStorage.removeItem("rol");
         alert("Cuenta borrada con éxito!");
         location.href = "../index.html";
       }
@@ -140,6 +141,7 @@ function deleteUser(e) {
       if (res.status == 404) {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
+        localStorage.removeItem("rol");
         alert("Usuario no existente!");
         location.href = "../index.html";
       }
@@ -168,5 +170,6 @@ function closeSesion(e) {
   console.log("Sesion cerrarda!");
   localStorage.removeItem("token");
   localStorage.removeItem("username");
+  localStorage.removeItem("rol");
   location.href = '../index.html';
 }

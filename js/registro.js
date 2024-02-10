@@ -11,6 +11,7 @@ let user = document.getElementById("user");
 let username = document.getElementById("username");
 let pass = document.getElementById("password");
 let email = document.getElementById("email");
+let rol = document.getElementById("rol");
 
 // Variables de validación
 let validUser;
@@ -45,7 +46,7 @@ function createUser(e) {
     city: city,
     phone: phone,
     club: club,
-    rol: "user",
+    rol: rol.value,
   }
 
   // Configura las opciones para la solicitud fetch de registro
