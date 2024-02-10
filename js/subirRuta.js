@@ -1,3 +1,7 @@
+if(localStorage.getItem("rol") !== "organizer"){
+    location.href = "../index.html";
+}
+
 //URL crear carrera
 const url = 'http://localhost:3333/api/race/new';
 
@@ -9,6 +13,7 @@ let comunidad = document.getElementById("comunidad");
 let provincia = document.getElementById("provincia");
 let categoria = document.getElementById("categoria");
 let distancia = document.getElementById("distancia");
+let tipo = document.getElementById("tipo");
 let nombre = document.getElementById("nombre");
 let date = document.getElementById("date");
 
@@ -80,7 +85,7 @@ function processGpx() {
 function saveData(e) {
     e.preventDefault();
     //validDist && validName && validGpx
-    if (validDist && validName) {
+    if (validDist && validName && formGpx.elements.date.value) {
         let options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -91,6 +96,7 @@ function saveData(e) {
                 "desNeg" : formGpx.elements.desnivelNeg.value,
                 "desnivel" : formGpx.elements.desnivel.value,
                 "coords" : coordenadas,
+                "tipo" : formGpx.elements.tipo.value,
                 "categoria" : formGpx.elements.categoria.value,
                 "comunidad" : formGpx.elements.comunidad.value,
                 "provincia" : formGpx.elements.provincia.value,
@@ -116,7 +122,7 @@ function saveData(e) {
                 location.href = "../html/rutas.html";
             })
     }else{
-        alert("Datos no validos")
+        alert("Datos no validos o ausentes")
     }
 }
 

@@ -25,7 +25,7 @@ if (localStorage.getItem("token")) {
             document.getElementById("password").value = response.pass;
             document.getElementById("city").value = response.city || "Sin definir";
             document.getElementById("phone").value = response.phone || "Sin definir";
-            
+
           });
       }
       // Maneja el caso en el que no existe el usuario (código 404)
@@ -123,33 +123,36 @@ function deleteUser(e) {
   e.preventDefault();
   console.log("borrar user e ir index");
 
-  //Si escribe la palabea de forma correcta confirma para borra el user
-  if(delete_input.value.trim() == "CONFIRMAR"){
-    console.log("SI");
+  // Si el usuario escribe la palabra correctamente, confirma para borrar el usuario
+  if (delete_input.value.trim() == "CONFIRMAR") {
+    
     fetch(urlDelete, optionsDelete)
-    .then(res => {
-      console.log(res);
-      // Maneja la respuesta del servidor
-      if (res.status == 200) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        localStorage.removeItem("rol");
-        alert("Cuenta borrada con éxito!");
-        location.href = "../index.html";
-      }
-      // Maneja el caso en el que no existe el usuario (código 404)
-      if (res.status == 404) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        localStorage.removeItem("rol");
-        alert("Usuario no existente!");
-        location.href = "../index.html";
-      }
-    });
-  }else{
-    alert("Palabra incorrecta!")
+      .then(res => {
+        console.log(res);
+        // Maneja la respuesta del servidor
+        if (res.status == 200) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("username");
+          localStorage.removeItem("rol");
+          alert("¡Cuenta borrada con éxito!");
+          location.href = "../index.html";
+        }
+        // Maneja el caso en el que no existe el usuario (código 404)
+        if (res.status == 404) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("username");
+          localStorage.removeItem("rol");
+          alert("¡Usuario no existente!");
+          location.href = "../index.html";
+        }
+      })
+      .catch(error => {
+        console.error("Error al realizar la solicitud:", error);
+        alert("Ocurrió un error al intentar borrar la cuenta.");
+      });
+  } else {
+    alert("¡Palabra incorrecta!");
   }
-  
 }
 
 // Mostrar y ocultar la contraseña

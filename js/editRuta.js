@@ -1,3 +1,7 @@
+if(localStorage.getItem("rol") !== "organizer"){
+    location.href = "../index.html";
+}
+
 // Obtener el ID del formulario desde la URL
 let form_id = window.location.search.slice(4);
 
@@ -44,35 +48,44 @@ fetch(url, optionsGet)
         console.error("Error al realizar la solicitud:", error);
     });
 
-function editRuta(e){
-    e.preventDefault()
+function editRuta(e) {
+    e.preventDefault();
+
+    // Verificar si existen datos en los campos de entrada
+    const inputsWithData = [eventoInput, distanciaInput, categoriaSelect, dateInput, primeroInput, segundoInput, terceroInput];
+    const hasData = inputsWithData.every(input => input.value.trim() !== '');
+
+    if (!hasData) {
+        alert("Por favor, complete todos los campos antes de editar el evento.");
+        return;
+    }
+
     let optionsPut = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            "evento" : eventoInput.value,
-            "distancia" : distanciaInput.value,
-            "categoria" : categoriaSelect.value,
-            "date" : dateInput.value,
+        body: JSON.stringify({
+            "evento": eventoInput.value,
+            "distancia": distanciaInput.value,
+            "categoria": categoriaSelect.value,
+            "date": dateInput.value,
             // "comunidad" : formGpx.elements.comunidad.value,
             // "provincia" : formGpx.elements.provincia.value,
-            "primero" : primeroInput.value,
-            "segundo" : segundoInput.value,
-            "tercero" : terceroInput.value,
+            "primero": primeroInput.value,
+            "segundo": segundoInput.value,
+            "tercero": terceroInput.value,
         }),
     };
 
     fetch(url, optionsPut)
         .then(response => {
             if (response.status == 200) {
-                alert("Evento editado con exito!!")
+                alert("Evento editado con éxito!!");
                 return response.json();
             } else {
                 throw new Error("Error al guardar los datos.");
             }
-            
         })
-        .then( data => {
+        .then(data => {
             console.log(data);
             location.href = "../html/rutas.html";
         })
@@ -81,7 +94,8 @@ function editRuta(e){
         });
 }
 
-function deleteRuta(e){
+
+function deleteRuta(e) {
     e.preventDefault()
 
     let optionsDelete = {
@@ -96,7 +110,8 @@ function deleteRuta(e){
                 location.href = "../html/rutas.html";
             } else {
                 throw new Error("Error al borrar los datos.");
-            }})
+            }
+        })
         .catch(error => {
             console.error("Error al realizar la solicitud:", error);
         });

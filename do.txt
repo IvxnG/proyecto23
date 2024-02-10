@@ -3,7 +3,7 @@
     x Comprobar si existe usuario
     x Iniciar sesion
     x Almacenar nombre y token
-    almacena rol
+    x almacena rol
 -Registro
     x Comprobacion de campos con RegExp
     x Nombre de usuario disponible
@@ -17,7 +17,7 @@
     x Eliminar cuenta
 -Main
     x Si exite la sesion cambian el menu
-    si es org sube rutas
+    x si es org sube rutas
 -Rutas
     x Lista todas las Rutas
     Pagina los resultados
@@ -34,7 +34,6 @@
     x mas datos
     x comprobar datos validos
     x añadir fecha
-    editar datos
+    x editar datos
 -Comporbsar token
 -function token
--funciones org

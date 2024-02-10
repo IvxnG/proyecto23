@@ -124,3 +124,68 @@ video{
     color: #555;
   }
   
+  .img_index{
+    border: solid 1px rgb(7, 165, 21);
+    border-radius: 10px 50px 10px 50px;
+  }
+
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+  }
+  
+  .footer__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer__section {
+    flex: 1;
+    margin-right: 30px;
+  }
+  
+  .footer__title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .footer__links,
+  .footer__social {
+    list-style: none;
+    padding: 0;
+    z-index: 111;
+  }
+  
+  .footer__links li,
+  .footer__social li {
+    margin-bottom: 10px;
+  }
+  
+  .footer__links a,
+  .footer__social a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer__bottom {
+    background-color: #222;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .footer__bottom a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  
+  /* Estilos para los iconos de las redes sociales (Font Awesome) */
+  .footer__social i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  

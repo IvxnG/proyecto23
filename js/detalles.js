@@ -35,6 +35,7 @@ fetch(url, options)
                                             
                                             <section>
                                                 <h2>Detalles</h2>
+                                                <p><strong>Tipo : </strong> ${ruta.tipo}</p>
                                                 <p><strong>Fecha : </strong> ${ruta.date}</p>
                                                 <p><strong>Desnivel : </strong> ${ruta.desnivel} mts</p>
                                                 <p><strong>Desnivel Positivo : </strong> ${ruta.desPos} mts</p>
