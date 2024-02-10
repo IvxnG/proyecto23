@@ -33,7 +33,7 @@
     x guardar coords
     x mas datos
     x comprobar datos validos
-    añadir fecha
+    x añadir fecha
     editar datos
 -Comporbsar token
 -function token

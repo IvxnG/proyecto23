@@ -134,6 +134,10 @@ function mostrarRuta(ruta) {
                     <input type="hidden" name="id" value="${ruta.id}">
                     <input style="background-color:#cdeb9b; color:#126255;" type="submit" value="Más Info.">
                 </form>
+                <form action="editRuta.html" method="get" name="form_id">
+                    <input type="hidden" name="id" value="${ruta.id}">
+                    <input style="background-color:#cdeb9b; color:#126255;" type="submit" value="Editar">
+                </form>
             </div>
         </div>`;
 }

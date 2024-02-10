@@ -12,18 +12,17 @@ let username = document.getElementById("username");
 let pass = document.getElementById("password");
 let email = document.getElementById("email");
 let rol = document.getElementById("rol");
+let city = document.getElementById("city");
+let club = document.getElementById("club");
+let phone = document.getElementById("phone");
 
 // Variables de validación
 let validUser;
 let validUsername;
 let validPass;
 let validEmail;
-
-// Añade listeners de eventos a elementos del formulario
-user.addEventListener("blur", checkUser);
-username.addEventListener("blur", checkUsername);
-email.addEventListener("blur", checkEmail);
-pass.addEventListener("blur", checkPass);
+let validCity;
+let validPhone;
 
 passIcon.addEventListener("click", showHidePass);
 btnCreate.addEventListener("click", createUser);
@@ -32,10 +31,6 @@ btnCreate.addEventListener("click", createUser);
 function createUser(e) {
   e.preventDefault();
 
-  // Obtiene valores de campos adicionales o establece un valor predeterminado si están vacíos
-  let city = document.getElementById("city").value.trim() || "Sin definir";
-  let club = document.getElementById("club").value.trim() || "Sin definir";
-  let phone = document.getElementById("phone").value.trim() || "Sin definir";
 
   // Crea un objeto con los datos del usuario
   let userData = {
@@ -43,9 +38,8 @@ function createUser(e) {
     username: username.value.trim(),
     mail: email.value.trim(),
     pass: pass.value.trim(),
-    city: city,
-    phone: phone,
-    club: club,
+    city: city.value.trim(),
+    phone: phone.value.trim(),
     rol: rol.value,
   }
 
@@ -63,7 +57,7 @@ function createUser(e) {
   };
 
   // Realiza la solicitud POST solo si todos los campos son válidos
-  if (validUser && validUsername && validPass && validEmail) {
+  if (validUser && validUsername && validPass && validEmail && validPhone && validCity) {
     //Comprueba si el nombre esta disponible para crear la cuenta
     fetch(urlCheck, optionsCheck)
       .then(response => {
@@ -74,23 +68,28 @@ function createUser(e) {
               if (res.status == 200) {
                 alert("Registrado con éxito!!");
                 location.href = "login.html";
+              } else if (res.status == 400) {
+                alert("Faltan datos!");
+              } else {
+                throw new Error("Error en el registro, intentelo de nuevo.");
               }
               return res.json();
             })
-            .then(response => {
-              if (response.id) {
-                console.log(response.name);
-              } else {
-                alert(response.msg);
-              }
-            })
         }
-        if (response.status == 409) {
+        else if (response.status == 409) {
           alert("Nombre de usuario en uso!")
+        }
+        else {
+          throw new Error("Error en el registro, intentelo de nuevo.");
         }
         return res.json();
       })
+      // .catch(error => {
+      //   alert("Error en el registro, intentelo de nuevo.");
+      // });
       
+  } else {
+    alert("Los datos introducidos no son válidos o faltan!")
   }
 }
 
@@ -108,54 +107,55 @@ function showHidePass(e) {
 }
 
 // Funciones para comprobar user, username, pass y email
+// Función genérica de validación
+function validateField(inputField, regex, iconId) {
+  const inputValue = inputField.value.trim();
+  const isValid = regex.test(inputValue);
+  const inputIcon = document.getElementById(iconId);
+  inputIcon.setAttribute("stroke", isValid ? "currentColor" : "red");
+  return isValid;
+}
+
+// Función para validar el campo de usuario
 function checkUser(e) {
   e.preventDefault();
-
-  // Verifica si el valor del campo de usuario cumple con la expresión regular
-  if (!(/^[a-zA-Z\s']+$/.test(user.value.trim()))) {
-    document.getElementById("userIcon").setAttribute("stroke", "red")
-    validUser = false;
-  } else {
-    document.getElementById("userIcon").setAttribute("stroke", "currentColor")
-    validUser = true;
-  }
+  validUser = validateField(user, /^[a-zA-Z\s']+$/, "userIcon");
 }
 
+// Función para validar el campo de nombre de usuario
 function checkUsername(e) {
   e.preventDefault();
-
-  // Verifica si el valor del campo de nombre de usuario cumple con la expresión regular
-  if (!(/^[a-zA-Z0-9_]{3,16}$/.test(username.value.trim()))) {
-    document.getElementById("usernameIcon").setAttribute("stroke", "red")
-    validUsername = false;
-  } else {
-    document.getElementById("usernameIcon").setAttribute("stroke", "currentColor")
-    validUsername = true;
-  }
+  validUsername = validateField(username, /^[a-zA-Z0-9_]{3,16}$/, "usernameIcon");
 }
 
+// Función para validar el campo de correo electrónico
 function checkEmail(e) {
   e.preventDefault();
-
-  // Verifica si el valor del campo de correo electrónico cumple con la expresión regular
-  if (!(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.value.trim()))) {
-    document.getElementById("mailIcon").setAttribute("stroke", "red")
-    validEmail = false;
-  } else {
-    document.getElementById("mailIcon").setAttribute("stroke", "currentColor")
-    validEmail = true;
-  }
+  validEmail = validateField(email, /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "mailIcon");
 }
 
+// Función para validar el campo de contraseña
 function checkPass(e) {
   e.preventDefault();
-
-  // Verifica si el valor del campo de contraseña cumple con la expresión regular
-  if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{10,}$/.test(pass.value.trim()))) {
-    document.getElementById("passIcon").setAttribute("stroke", "red")
-    validPass = false;
-  } else {
-    document.getElementById("passIcon").setAttribute("stroke", "currentColor")
-    validPass = true;
-  }
+  validPass = validateField(pass, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{10,}$/, "passIcon");
 }
+
+// Función para validar el campo de teléfono
+function checkPhone(e) {
+  e.preventDefault();
+  validPhone = validateField(phone, /^(?:(?:(?:\+|00)?34[\s\.-]?)?(6\d{2}[\s\.-]?\d{3}[\s\.-]?\d{3}|[789]\d{2}[\s\.-]?\d{3}[\s\.-]?\d{3}))$/, "phoneIcon");
+}
+
+// Función para validar el campo de ciudad
+function checkCity(e) {
+  e.preventDefault();
+  validCity = validateField(city, /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'-]+$/ , "cityIcon");
+}
+
+// Asociar las funciones de validación a los eventos blur de los campos de entrada
+user.addEventListener("blur", checkUser);
+username.addEventListener("blur", checkUsername);
+email.addEventListener("blur", checkEmail);
+pass.addEventListener("blur", checkPass);
+phone.addEventListener("blur", checkPhone);
+city.addEventListener("blur", checkCity);

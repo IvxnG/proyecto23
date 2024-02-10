@@ -25,7 +25,7 @@ if (localStorage.getItem("token")) {
             document.getElementById("password").value = response.pass;
             document.getElementById("city").value = response.city || "Sin definir";
             document.getElementById("phone").value = response.phone || "Sin definir";
-            document.getElementById("club").value = response.club || "Sin definir";
+            
           });
       }
       // Maneja el caso en el que no existe el usuario (código 404)

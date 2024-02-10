@@ -40,6 +40,13 @@ fetch(url, options)
                                                 <p><strong>Desnivel Positivo : </strong> ${ruta.desPos} mts</p>
                                                 <p><strong>Desnivel Negativo : </strong> ${ruta.desNeg} mts</p>
                                             </section>
+
+                                            <section>
+                                                <h2>Ganadores</h2>
+                                                <p><strong>1º : </strong> ${ruta.primero}</p>
+                                                <p><strong>2º : </strong> ${ruta.segundo} </p>
+                                                <p><strong>3º  : </strong> ${ruta.tercero} </p>
+                                            </section>
                                             `;
 
                     map = L.map('map').setView(ruta.coords[0], 10);

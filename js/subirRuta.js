@@ -95,6 +95,9 @@ function saveData(e) {
                 "comunidad" : formGpx.elements.comunidad.value,
                 "provincia" : formGpx.elements.provincia.value,
                 "date" : formGpx.elements.date.value,
+                "primero" : "TBD",
+                "segundo" : "TBD",
+                "tercero" : "TBD",
             }),
         };
 
