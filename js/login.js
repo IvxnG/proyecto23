@@ -61,7 +61,6 @@ function logUser(e) {
         }
       })
       .then(response => {
-        console.log(response);
         // Almacena el token en el localStorage y redirige a la página principal
         localStorage.setItem("token", response.token);
         localStorage.setItem("username", response.username);
@@ -83,8 +82,9 @@ function logUser(e) {
           })
           .then(data => {
             localStorage.setItem("rol", data.rol);
+            location.href = '../index.html';
           })
-        location.href = '../index.html';
+        
       })
       .catch(error => {
         console.error("Error al registrar:", error);
