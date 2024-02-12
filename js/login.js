@@ -84,6 +84,7 @@ function logUser(e) {
             }
           })
           .then(data => {
+            localStorage.setItem("id", data.id);
             localStorage.setItem("rol", data.rol);
             location.href = '../index.html';
           })

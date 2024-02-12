@@ -1,7 +1,7 @@
 // Define la URL para la solicitud GET utilizando el username almacenado en localStorage y otras URL
 const url = `http://localhost:3333/api/user/username/${localStorage.getItem("username")}`;
 const urlCheck = 'http://localhost:3333/api/user/check';
-const urlDelete = `http://localhost:3333/api/user/username/${localStorage.getItem("username")}`;
+const urlPut = `http://localhost:3333/api/user/id/${localStorage.getItem("id")}`;
 
 //Guardo los dos formularios
 let formEdit = document.getElementById("formEdit");
@@ -16,6 +16,17 @@ let btnConfirmDelete = document.getElementById("btnConfirmDelete");
 let btnCancelDelete = document.getElementById("btnCancelDelete");
 let delete_input = document.getElementById("delete_input");
 
+let validUsername = false;
+let validCity = false;
+let validEmail = false;
+let validPass = false;
+let validPhone = false;
+
+//Icono para mostrar y ocultar la contraseña
+let passIcon = document.getElementById("passIcon");
+let pass = document.getElementById("password");
+passIcon.addEventListener("click", showHidePass);
+
 // Asigna eventos a los botones
 btnEdit.addEventListener("click", editPerfil);
 btnCancel.addEventListener("click", goIndex);
@@ -23,11 +34,6 @@ btnToken.addEventListener("click", closeSesion);
 btnDelete.addEventListener("click", showDeleteForm);
 btnCancelDelete.addEventListener("click", showDeleteForm);
 btnConfirmDelete.addEventListener("click", deleteUser);
-
-//Icono para mostrar y ocultar la contraseña
-let passIcon = document.getElementById("passIcon");
-let pass = document.getElementById("password");
-passIcon.addEventListener("click", showHidePass);
 
 // Verifica si hay un token en localStorage antes de realizar la solicitud de los datos del usuario
 if (localStorage.getItem("token")) {
@@ -59,7 +65,7 @@ if (localStorage.getItem("token")) {
     .catch(error => {
       console.error('Error al procesar la solicitud:', error);
       alert('Ocurrió un error al procesar la solicitud.');
-  });
+    });
 
 } else {
   //redirige a la landing page si no esta logeado
@@ -72,14 +78,17 @@ if (localStorage.getItem("token")) {
 // Función para editar los datos del usuario, comprueba que el username no exita, por si lo cambia
 function editPerfil(e) {
   e.preventDefault();
-  console.log("aqui edito");
-
+  checkCity(e);
+  checkEmail(e);
+  checkPass(e);
+  checkPhone(e);
+  checkUsername(e);
   //Comprueba que los datos introducidos cumplen las expresiones regulares
-  if (true) {
+  if (validUsername && validCity && validEmail && validPass && validPhone) {
     // Configura las opciones para la solicitud fetch de comprobar el nombre
     let optionsPut = {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${localStorage.getItem("token")}`},
       body: JSON.stringify({
         name: user.value.trim(),
         mail: email.value.trim(),
@@ -90,23 +99,24 @@ function editPerfil(e) {
     };
 
     //Edita los datos
-    fetch(url, optionsPut)
+    fetch(urlPut, optionsPut)
       .then(response => {
         if (response.status == 200) {
           return response.json()
         } else {
-          throw new Error("Error en el registro, intentelo de nuevo.");
+          throw new Error("Error en la edición, intentelo de nuevo.");
         }
       }).then(data => {
         console.log(data);
         alert("Datos editados con exito!")
+        location.href = "../index.html";
       })
       .catch(error => {
         console.error("Error al editar tus datos:", error);
         alert("Ocurrió un error al editar tus datos.");
       });
   } else {
-    console.log("test");
+    console.log("Datos nuevos no validos.");
   }
 
 }
@@ -130,7 +140,7 @@ function deleteUser(e) {
 
   // Si el usuario escribe la palabra correctamente, confirma para borrar el usuario
   if (delete_input.value.trim() == "CONFIRMAR") {
-    
+
     fetch(urlDelete, optionsDelete)
       .then(res => {
         console.log(res);
@@ -139,6 +149,7 @@ function deleteUser(e) {
           localStorage.removeItem("token");
           localStorage.removeItem("username");
           localStorage.removeItem("rol");
+          localStorage.removeItem("id");
           alert("¡Cuenta borrada con éxito!");
           location.href = "../index.html";
         }
@@ -147,6 +158,7 @@ function deleteUser(e) {
           localStorage.removeItem("token");
           localStorage.removeItem("username");
           localStorage.removeItem("rol");
+          localStorage.removeItem("id");
           alert("¡Usuario no existente!");
           location.href = "../index.html";
         }
@@ -173,6 +185,7 @@ function closeSesion(e) {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
   localStorage.removeItem("rol");
+  localStorage.removeItem("id");
   location.href = '../index.html';
 }
 
@@ -196,3 +209,76 @@ function updateFields(response) {
   document.getElementById("city").value = response.city || "Sin definir";
   document.getElementById("phone").value = response.phone || "Sin definir";
 }
+
+
+let username = document.getElementById("username");
+let email = document.getElementById("email");
+let city = document.getElementById("city");
+let club = document.getElementById("club");
+let phone = document.getElementById("phone");
+
+username.addEventListener("change", checkUsername);
+email.addEventListener("change", checkEmail);
+pass.addEventListener("change", checkPass);
+phone.addEventListener("change", checkPhone);
+city.addEventListener("change", checkCity);
+
+function validateField(inputField, regex, iconId) {
+  const inputValue = inputField.value.trim();
+  const isValid = regex.test(inputValue);
+  const inputIcon = document.getElementById(iconId);
+  inputIcon.setAttribute("stroke", isValid ? "currentColor" : "red");
+  return isValid;
+}
+
+// Función para validar el campo de nombre de usuario
+function checkUsername(e) {
+  e.preventDefault();
+  validUsername = validateField(username, /^[a-zA-Z0-9_\s]{3,20}$/, "usernameIcon");
+  if (!validUsername) {
+    alert("Apodo no válido. Por favor, introduce un apodo de usuario válido.(Minimo 3 caracteres)");
+  }
+}
+
+// Función para validar el campo de correo electrónico
+function checkEmail(e) {
+  e.preventDefault();
+  validEmail = validateField(email, /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "mailIcon");
+  if (!validEmail) {
+    alert("Email no válido. Por favor, introduce un email de usuario válido.");
+  }
+}
+
+// Función para validar el campo de contraseña
+function checkPass(e) {
+  e.preventDefault();
+  validPass = validateField(pass, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{10,}$/, "passIcon");
+  if (!validPass) {
+    alert("La contraseña entroducida no es segura.")
+  }
+}
+
+// Función para validar el campo de teléfono
+function checkPhone(e) {
+  e.preventDefault();
+  validPhone = validateField(phone, /^(?:(?:(?:\+|00)?34[\s\.-]?)?(6\d{2}[\s\.-]?\d{3}[\s\.-]?\d{3}|[789]\d{2}[\s\.-]?\d{3}[\s\.-]?\d{3}))$/, "phoneIcon");
+  if (!validPhone) {
+    alert("El telefono o es valido. Por favor cambialo.")
+  }
+}
+
+// Función para validar el campo de ciudad
+function checkCity(e) {
+  e.preventDefault();
+  validCity = validateField(city, /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'-]+$/, "cityIcon");
+  if (!validCity) {
+    alert("La ciudad introducida no es valida.")
+  }
+}
+
+// Asociar las funciones de validación a los eventos blur de los campos de entrada
+username.addEventListener("change", checkUsername);
+email.addEventListener("change", checkEmail);
+pass.addEventListener("change", checkPass);
+phone.addEventListener("change", checkPhone);
+city.addEventListener("change", checkCity);
