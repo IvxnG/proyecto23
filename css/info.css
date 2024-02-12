@@ -1,0 +1,20 @@
+.infoUser {
+    position: absolute;
+    background-color: white;
+    color: black;
+    max-width: 20%;
+    padding: 20px;
+    border-radius: 20px;
+    top: 20%;
+    right: 10%;
+}
+.infoPass {
+    position: absolute;
+    background-color: white;
+    color: black;
+    max-width: 20%;
+    padding: 20px;
+    border-radius: 20px;
+    top: 40%;
+    right: 10%;
+}

@@ -1,3 +1,6 @@
+if(localStorage.getItem("token") || localStorage.getItem("username") || localStorage.getItem("rol")){
+  location.href = "../index.html";
+}
 // Definición de la URL del servidor para la autenticación
 const url = 'http://localhost:3333/api/auth/login';
 

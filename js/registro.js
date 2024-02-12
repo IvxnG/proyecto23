@@ -1,3 +1,7 @@
+if(localStorage.getItem("token") || localStorage.getItem("username") || localStorage.getItem("rol")){
+  location.href = "../index.html";
+}
+
 // Definición de la URL del servidor para creae el usuario
 const urlRegister = 'http://localhost:3333/api/user/register';
 const urlCheck = 'http://localhost:3333/api/user/check';
@@ -125,7 +129,7 @@ function checkUser(e) {
 // Función para validar el campo de nombre de usuario
 function checkUsername(e) {
   e.preventDefault();
-  validUsername = validateField(username, /^[a-zA-Z0-9_]{3,16}$/, "usernameIcon");
+  validUsername = validateField(username, /^[a-zA-Z0-9_\s]{3,20}$/, "usernameIcon");
 }
 
 // Función para validar el campo de correo electrónico

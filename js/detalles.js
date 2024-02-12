@@ -77,5 +77,10 @@ fetch(url, options)
             {color : "green"}
         ).addTo(map);
     })
+    .catch(error => {
+        // Manejar el error
+        console.error('Error en la solicitud:', error.message);
+        alert('Hubo un error en la solicitud: ' + error.message);
+    });
 
 

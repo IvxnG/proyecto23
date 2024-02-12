@@ -45,7 +45,9 @@ fetch(url, optionsGet)
         terceroInput.value = ruta.tercero;
     })
     .catch(error => {
-        console.error("Error al realizar la solicitud:", error);
+        // Manejar el error
+        console.error('Error en la solicitud:', error.message);
+        alert('Hubo un error en la solicitud: ' + error.message);
     });
 
 function editRuta(e) {

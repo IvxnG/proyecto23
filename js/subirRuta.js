@@ -122,6 +122,11 @@ function saveData(e) {
                 console.log(data);
                 location.href = "../html/rutas.html";
             })
+            .catch(error => {
+                // Manejar el error
+                console.error('Error en la solicitud:', error);
+                alert('Hubo un error en la solicitud. Por favor, inténtalo de nuevo más tarde.');
+            });
     }else{
         alert("Datos no validos o ausentes")
     }
@@ -145,7 +150,7 @@ function checkName(e) {
 function checkDistancia(e) {
     e.preventDefault();
     // Expresión regular para verificar si solo hay dígitos del 0 al 9
-    const regex = /^\d+$/;
+    const regex = /^\d+(\.\d+)?(,\d+)?|^\d+(,\d+)?(\.\d+)?$/;
     const distancia = e.target.value.trim(); // Obtener el valor del campo de entrada y eliminar los espacios en blanco al principio y al final
     
     if (regex.test(distancia)) {
