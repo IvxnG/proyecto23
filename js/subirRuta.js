@@ -104,6 +104,7 @@ function saveData(e) {
                 "primero" : "TBD",
                 "segundo" : "TBD",
                 "tercero" : "TBD",
+                "organizer" : localStorage.getItem("username"),
             }),
         };
 

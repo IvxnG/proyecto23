@@ -52,7 +52,7 @@
     width: 70px;
     text-align: center;
     color: #122f13;;
-    font-size: 14px;
+    font-size: medium;
     line-height: 90px;
     font-weight: bold;
     perspective: 1000px;
@@ -128,4 +128,18 @@
 }
 .nav__cb:checked ~ .nav__btn:after {
     transform: translateY(-7px) rotate(225deg);
+}
+
+.nav__item a{
+    display: inline-block;
+    vertical-align: top;
+    width: 70px;
+    text-align: center;
+    color: #122f13;;
+    font-size: medium;
+    line-height: 90px;
+    font-weight: bold;
+    perspective: 1000px;
+    transition: color 0.3s;
+    cursor: pointer;
 }

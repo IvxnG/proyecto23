@@ -189,3 +189,19 @@ video{
     margin-right: 10px;
   }
   
+  /* Estilos para pantallas grandes y proyectores */
+@media only screen and (min-width: 992px) {
+  .nav__item a {
+    display: inline-block;
+    vertical-align: top;
+    width: 70px;
+    text-align: center;
+    color: #122f13;
+    font-size: 15px;
+    line-height: 90px;
+    font-weight: bold;
+    perspective: 1000px;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+}
