@@ -143,7 +143,7 @@ function checkName(e) {
         validName = true;
     } else {
         validName = false;
-        console.log("No name");
+        alert("Nombre de evento no valido. Por favor cambialo.");
     }
 }
 
@@ -157,7 +157,7 @@ function checkDistancia(e) {
         validDist = true;
     } else {
         validDist = false;
-        console.log("No dist");
+        alert("Valor de distancia no valido. Solo números separados por coma o punto decimal.");
     }
 }
 

@@ -124,42 +124,60 @@ function validateField(inputField, regex, iconId) {
 function checkUser(e) {
   e.preventDefault();
   validUser = validateField(user, /^[a-zA-Z\s']+$/, "userIcon");
+  if (!validUser) {
+    alert("Usuario no válido. Por favor, introduce un nombre de usuario válido.");
+  }
 }
 
 // Función para validar el campo de nombre de usuario
 function checkUsername(e) {
   e.preventDefault();
   validUsername = validateField(username, /^[a-zA-Z0-9_\s]{3,20}$/, "usernameIcon");
+  if (!validUsername) {
+    alert("Apodo no válido. Por favor, introduce un apodo de usuario válido.(Minimo 3 caracteres)");
+  }
 }
 
 // Función para validar el campo de correo electrónico
 function checkEmail(e) {
   e.preventDefault();
   validEmail = validateField(email, /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "mailIcon");
+  if (!validEmail) {
+    alert("Email no válido. Por favor, introduce un email de usuario válido.");
+  }
 }
 
 // Función para validar el campo de contraseña
 function checkPass(e) {
   e.preventDefault();
   validPass = validateField(pass, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{10,}$/, "passIcon");
+  if (!validPass) {
+    alert("La contraseña entroducida no es segura.")
+  }
 }
 
 // Función para validar el campo de teléfono
 function checkPhone(e) {
   e.preventDefault();
   validPhone = validateField(phone, /^(?:(?:(?:\+|00)?34[\s\.-]?)?(6\d{2}[\s\.-]?\d{3}[\s\.-]?\d{3}|[789]\d{2}[\s\.-]?\d{3}[\s\.-]?\d{3}))$/, "phoneIcon");
+  if (!validPhone) {
+    alert("El telefono o es valido. Por favor cambialo.")
+  }
 }
 
 // Función para validar el campo de ciudad
 function checkCity(e) {
   e.preventDefault();
   validCity = validateField(city, /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s'-]+$/ , "cityIcon");
+  if (!validCity) {
+    alert("La ciudad introducida no es valida.")
+  }
 }
 
 // Asociar las funciones de validación a los eventos blur de los campos de entrada
-user.addEventListener("blur", checkUser);
-username.addEventListener("blur", checkUsername);
-email.addEventListener("blur", checkEmail);
-pass.addEventListener("blur", checkPass);
-phone.addEventListener("blur", checkPhone);
-city.addEventListener("blur", checkCity);
+user.addEventListener("change", checkUser);
+username.addEventListener("change", checkUsername);
+email.addEventListener("change", checkEmail);
+pass.addEventListener("change", checkPass);
+phone.addEventListener("change", checkPhone);
+city.addEventListener("change", checkCity);

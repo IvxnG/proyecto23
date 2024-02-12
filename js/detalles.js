@@ -16,7 +16,7 @@ fetch(url, options)
         if (res.status == 200) {
             return res.json();     
         } else {
-            alert("Error en la carga. Intentelo de nuevo.");
+            throw new Error("Error en al cargar detalles, intentelo de nuevo.");
         }
     })
     .then(ruta => {

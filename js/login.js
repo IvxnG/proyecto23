@@ -100,15 +100,10 @@ function logUser(e) {
 function showHidePass(e) {
   e.preventDefault();
   pass.type = pass.type === "password" ? "text" : "password";
-  // if (pass.type == "password") {
-  //   pass.type = "text";
-  // } else {
-  //   pass.type = "password"
-  // }
 }
 
 
-//Depuracion !!!!!!!!!!!!borrar!!!!!!!!!!!
+//Depuracion 
 let users = document.getElementById("users");
 users.addEventListener("click", usersAll)
 
