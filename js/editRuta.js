@@ -70,8 +70,6 @@ function editRuta(e) {
             "distancia": distanciaInput.value,
             "categoria": categoriaSelect.value,
             "date": dateInput.value,
-            // "comunidad" : formGpx.elements.comunidad.value,
-            // "provincia" : formGpx.elements.provincia.value,
             "primero": primeroInput.value,
             "segundo": segundoInput.value,
             "tercero": terceroInput.value,

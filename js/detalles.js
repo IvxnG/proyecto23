@@ -11,6 +11,7 @@ let options = {
 
 let detalles = document.getElementById("detalles")
 
+//Cargar detalles de la ruta seleccionada
 fetch(url, options)
     .then(res => {
         if (res.status == 200) {

@@ -72,12 +72,14 @@ if (localStorage.getItem("token")) {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
   localStorage.removeItem("rol");
+  localStorage.removeItem("id");
   location.href = "../index.html";
 }
 
 // Función para editar los datos del usuario, comprueba que el username no exita, por si lo cambia
 function editPerfil(e) {
   e.preventDefault();
+  
   checkCity(e);
   checkEmail(e);
   checkPass(e);

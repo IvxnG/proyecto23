@@ -103,11 +103,7 @@ function showHidePass(e) {
   e.preventDefault();
 
   // Cambia el tipo de entrada del campo de contraseña para mostrar u ocultar la contraseña
-  if (pass.type == "password") {
-    pass.type = "text";
-  } else {
-    pass.type = "password"
-  }
+  pass.type = pass.type === "password" ? "text" : "password";
 }
 
 // Funciones para comprobar user, username, pass y email

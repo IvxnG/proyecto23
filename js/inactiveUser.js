@@ -1,7 +1,8 @@
 if(localStorage.getItem("token")){
+    //Comprobar se el usuario dejo la web inactiva para cerrar sesion
     function inactiveUser(){
-        // Limpiar el almacenamiento local después de 15 minutos de inactividad
-        const inactivityTimeout = 15 * 60 * 1000;
+        // Limpiar el almacenamiento local después de 10 minutos de inactividad
+        const inactivityTimeout = 10 * 60 * 1000;
         let timer;
     
         function resetTimer() {

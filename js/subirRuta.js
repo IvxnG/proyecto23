@@ -1,4 +1,4 @@
-if(localStorage.getItem("rol") !== "organizer"){
+if (localStorage.getItem("rol") !== "organizer") {
     location.href = "../index.html";
 }
 
@@ -70,11 +70,29 @@ function processGpx() {
                 let latitud = parseFloat(trkpt.getAttribute('lat'));
                 let longitud = parseFloat(trkpt.getAttribute('lon'));
 
-                // Seleccionar una de cada 250 coordenadas de manera equitativa
-                if (index % 250 === 0) {
+                // Seleccionar una de cada 200 coordenadas de manera equitativa
+                if (index % 200 === 0) {
                     coordenadas.push({ lat: latitud, lon: longitud });
                 }
             });
+
+            // Calcular el total de puntos y el 2% de estos puntos
+            // const totalPuntos = trkpts.length;
+            // const porcentaje20 = Math.ceil(totalPuntos * 0.02);
+
+            // // Variable para contar el número de puntos seleccionados
+            // let puntosSeleccionados = 0;
+
+            // trkpts.forEach(function (trkpt, index) {
+            //     // Si aún no hemos seleccionado el 2% de los puntos y este punto es uno de cada 5 puntos
+            //     if (puntosSeleccionados < porcentaje20 && index % Math.ceil(totalPuntos / porcentaje20) === 0) {
+            //         let latitud = parseFloat(trkpt.getAttribute('lat'));
+            //         let longitud = parseFloat(trkpt.getAttribute('lon'));
+            //         coordenadas.push({ lat: latitud, lon: longitud });
+
+            //         puntosSeleccionados++; // Incrementar el contador de puntos seleccionados
+            //     }
+            // });
         };
 
         fileReader.readAsText(file);
@@ -89,22 +107,22 @@ function saveData(e) {
         let options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                "evento" : nombre.value,
-                "distancia" : distancia.value,
-                "desPos" : formGpx.elements.desnivelPos.value,
-                "desNeg" : formGpx.elements.desnivelNeg.value,
-                "desnivel" : formGpx.elements.desnivel.value,
-                "coords" : coordenadas,
-                "tipo" : formGpx.elements.tipo.value,
-                "categoria" : formGpx.elements.categoria.value,
-                "comunidad" : formGpx.elements.comunidad.value,
-                "provincia" : formGpx.elements.provincia.value,
-                "date" : formGpx.elements.date.value,
-                "primero" : "TBD",
-                "segundo" : "TBD",
-                "tercero" : "TBD",
-                "organizer" : localStorage.getItem("username"),
+            body: JSON.stringify({
+                "evento": nombre.value,
+                "distancia": distancia.value,
+                "desPos": formGpx.elements.desnivelPos.value,
+                "desNeg": formGpx.elements.desnivelNeg.value,
+                "desnivel": formGpx.elements.desnivel.value,
+                "coords": coordenadas,
+                "tipo": formGpx.elements.tipo.value,
+                "categoria": formGpx.elements.categoria.value,
+                "comunidad": formGpx.elements.comunidad.value,
+                "provincia": formGpx.elements.provincia.value,
+                "date": formGpx.elements.date.value,
+                "primero": "TBD",
+                "segundo": "TBD",
+                "tercero": "TBD",
+                "organizer": localStorage.getItem("username"),
             }),
         };
 
@@ -116,9 +134,9 @@ function saveData(e) {
                 } else {
                     throw new Error("Error al guardar los datos.");
                 }
-                
+
             })
-            .then( data => {
+            .then(data => {
                 console.log(data);
                 location.href = "../html/rutas.html";
             })
@@ -127,7 +145,7 @@ function saveData(e) {
                 console.error('Error en la solicitud:', error);
                 alert('Hubo un error en la solicitud. Por favor, inténtalo de nuevo más tarde.');
             });
-    }else{
+    } else {
         alert("Datos no validos o ausentes")
     }
 }
@@ -138,7 +156,7 @@ function checkName(e) {
     // Expresión regular para verificar si solo hay letras (mayúsculas o minúsculas) y espacios
     const regex = /^[a-zA-Z\s]+$/;
     const name = e.target.value.trim(); // Obtener el valor del campo de entrada y eliminar los espacios en blanco al principio y al final
-    
+
     if (regex.test(name)) {
         validName = true;
     } else {
@@ -152,7 +170,7 @@ function checkDistancia(e) {
     // Expresión regular para verificar si solo hay dígitos del 0 al 9
     const regex = /^\d+(\.\d+)?(,\d+)?|^\d+(,\d+)?(\.\d+)?$/;
     const distancia = e.target.value.trim(); // Obtener el valor del campo de entrada y eliminar los espacios en blanco al principio y al final
-    
+
     if (regex.test(distancia)) {
         validDist = true;
     } else {

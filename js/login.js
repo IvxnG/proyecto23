@@ -50,7 +50,6 @@ function logUser(e) {
       body: JSON.stringify(userData),
     };
 
-    console.log(userData);
 
     // Realiza la solicitud POST para la autenticación del usuario
     fetch(url, options)
@@ -70,7 +69,7 @@ function logUser(e) {
 
         fetch(`http://localhost:3333/api/user/username/${response.username}`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json',  'Authorization': `Bearer ${response.token}`},
         })
           .then(res => {
             if (res.status == 200) {

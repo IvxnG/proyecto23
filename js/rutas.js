@@ -57,8 +57,8 @@ function cargarRutas() {
                     .then(ruta => {
                         const nombreFiltro = filter1.value.trim().toLowerCase();
                         const comunidadFiltro = filterComunidad.value.trim().toLowerCase();
-                        const distanciaMinima = parseInt(filterDistanciaMinima.value.trim()); // Convertir a entero
-                        const distanciaMaxima = parseInt(filterDistanciaMaxima.value.trim()); // Convertir a entero
+                        const distanciaMinima = parseInt(filterDistanciaMinima.value.trim()); 
+                        const distanciaMaxima = parseInt(filterDistanciaMaxima.value.trim()); 
 
                         const coincideNombre = nombreFiltro === "" || (ruta.evento && ruta.evento.toLowerCase().includes(nombreFiltro));
                         let coincideComunidad = true;
