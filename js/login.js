@@ -25,7 +25,8 @@ function home() {
 function logUser(e) {
   e.preventDefault();
   let username = document.getElementById("user");
-
+  pass = document.getElementById("password");
+  
   // Validación para asegurarse de que se ingresen tanto el nombre de usuario como la contraseña
   if (username.value.length == 0) {
     alert("Introduce el nombre de usuario");
