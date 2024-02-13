@@ -143,7 +143,7 @@ function deleteUser(e) {
   // Si el usuario escribe la palabra correctamente, confirma para borrar el usuario
   if (delete_input.value.trim() == "CONFIRMAR") {
 
-    fetch(urlDelete, optionsDelete)
+    fetch(url, optionsDelete)
       .then(res => {
         console.log(res);
         // Maneja la respuesta del servidor
@@ -152,6 +152,7 @@ function deleteUser(e) {
           localStorage.removeItem("username");
           localStorage.removeItem("rol");
           localStorage.removeItem("id");
+          localStorage.clear();
           alert("¡Cuenta borrada con éxito!");
           location.href = "../index.html";
         }
@@ -161,6 +162,7 @@ function deleteUser(e) {
           localStorage.removeItem("username");
           localStorage.removeItem("rol");
           localStorage.removeItem("id");
+          localStorage.clear();
           alert("¡Usuario no existente!");
           location.href = "../index.html";
         }

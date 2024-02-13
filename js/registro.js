@@ -17,7 +17,7 @@ let pass = document.getElementById("password");
 let email = document.getElementById("email");
 let rol = document.getElementById("rol");
 let city = document.getElementById("city");
-let club = document.getElementById("club");
+//let club = document.getElementById("club");
 let phone = document.getElementById("phone");
 
 // Variables de validación
@@ -44,6 +44,7 @@ function createUser(e) {
     pass: pass.value.trim(),
     city: city.value.trim(),
     phone: phone.value.trim(),
+    club: username.value.trim(),
     rol: rol.value,
   }
 
