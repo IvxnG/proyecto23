@@ -1,4 +1,4 @@
-if(localStorage.getItem("token") || localStorage.getItem("username") || localStorage.getItem("rol")){
+if (localStorage.getItem("token") || localStorage.getItem("username") || localStorage.getItem("rol")) {
   location.href = "../index.html";
 }
 // Definición de la URL del servidor para la autenticación
@@ -26,7 +26,7 @@ function logUser(e) {
   e.preventDefault();
   let username = document.getElementById("user");
   pass = document.getElementById("password");
-  
+
   // Validación para asegurarse de que se ingresen tanto el nombre de usuario como la contraseña
   if (username.value.length == 0) {
     alert("Introduce el nombre de usuario");
@@ -70,7 +70,7 @@ function logUser(e) {
 
         fetch(`http://localhost:3333/api/user/username/${response.username}`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json',  'Authorization': `Bearer ${response.token}`},
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${response.token}` },
         })
           .then(res => {
             if (res.status == 200) {
@@ -86,9 +86,11 @@ function logUser(e) {
           .then(data => {
             localStorage.setItem("id", data.id);
             localStorage.setItem("rol", data.rol);
+            const currentTime = new Date().getTime();
+            localStorage.setItem('tokenStartTime', currentTime.toString());
             location.href = '../index.html';
           })
-        
+
       })
       .catch(error => {
         console.error("Error al registrar:", error);
