@@ -190,6 +190,7 @@ function closeSesion(e) {
   localStorage.removeItem("username");
   localStorage.removeItem("rol");
   localStorage.removeItem("id");
+  localStorage.removeItem("tokenStartTime");
   location.href = '../index.html';
 }
 
